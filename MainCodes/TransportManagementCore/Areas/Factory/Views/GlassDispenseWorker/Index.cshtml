@@ -1,0 +1,793 @@
+﻿@{ ViewData["Title"] = "Visit for Dispensing Glasses : Staff";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <style>
+        .dataTables_scrollBody {
+            max-height: 370px !important;
+        }
+
+        .dataTables_length {
+            visibility: hidden;
+        }
+
+        .dataTables_wrapper {
+            font-size: 11px;
+            font-style: initial;
+        }
+
+        input[type="text"] {
+            background-color: #d4f1f9;
+            font-family: 'Myriad Pro';
+            font-size: 15px
+        }
+
+        input[type="number"] {
+            background-color: #d4f1f9;
+            font-family: 'Myriad Pro';
+            font-size: 13px;
+            padding: 0px 10px;
+        }
+
+        h1 {
+            font-family: 'Myriad Pro';
+            color: blueviolet
+        }
+
+        h2 {
+            font-family: 'Myriad Pro'
+        }
+
+        label {
+            font-family: 'Myriad Pro';
+            color: #454091;
+            font-size: 14px
+        }
+
+        #mainHeading {
+            display: inline-block;
+            padding: 5px 10px; /* Adjust padding as needed */
+            border: solid lightgray; /* Border style */
+            border-radius: 5px; /* Rounded corners */
+            background-color: #d4f1f9; /*Form Name top Main Heading Color*/
+            color: #263272;
+        }
+
+        #DivFormMode label {
+            font-family: 'Myriad Pro';
+            color: #263272; /*New Edit Check boxes Color*/
+            font-size: 17px
+        }
+
+        #AutoRefDiv h2 {
+            text-align: center;
+            border: solid lightgray;
+            color: #5E1F5C;
+            background-color: #d4f1f9;
+            font-size: 27px
+        }
+
+        #DivVAGlasses {
+            border: solid lightgray;
+            color: #5E1F5C;
+            background-color: #d4f1f9;
+        }
+
+        #DivVAGlasses {
+            font-size: 20px;
+        }
+
+        #lastRefDiv h3 {
+            background-color: lightgray;
+            color: #1E1F4F;
+        }
+
+        #inputBorder input {
+            border-radius: 20px;
+            background-color: #d4f1f9;
+        }
+
+        #ddlGetGlassDispenseId, #txtCompanyCode, #txtWorkerCode, #txtAge, #ddlRightSpherical, #ddlLeftSpherical, #ddlRightCyclinderical, #ddlLeftCyclinderical, #txtlastVisitDate, #ddlGetAutoRefId {
+            background-color: #d4f1f9; /*Form Name top Main Heading Color*/
+            border-radius: 15px; /* Rounded corners */
+        }
+
+        #inputBorder .col-lg-2 {
+            text-align: center;
+        }
+
+        #DvSp .col-lg-5 .row .col-lg-3 {
+            width: 32%;
+            margin: 0px,0px,0px,0px !important
+        }
+
+        #DvSp .col-lg-5 .row .col-lg-2 {
+            padding: 0;
+            /*margin: 0px,0px,0px,0px !important*/
+        }
+
+        #DvSp .col-lg-5 .row .col-lg-3 .form-control {
+            padding: 0;
+            /*margin: 0px,0px,0px,0px !important*/
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        #lastRefDivlabel {
+            text-align: left !important;
+            margin: 0px,0px,0px,0px !important;
+        }
+
+        #txtIPD {
+            width: 100%;
+        }
+
+        #hideHeading {
+            color: #d4f1f9; /*Form Name top Main Heading Color*/
+        }
+
+        #lblIPD {
+            background-color: lightgray;
+            color: #1E1F4F
+        }
+
+        #txtLastIPD {
+            background-color: #d4f1f9; /*Form Name top Main Heading Color*/
+        }
+
+        #IPDLastLabel {
+            padding: 25px 0 0 0;
+        }
+
+        #DivVisualAcuity .form-control {
+            display: block;
+            width: 100%;
+            height: unset;
+            padding: 4px 2px !important;
+            font-size: 11px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin: 2px;
+            background-color: #d4f1f9
+        }
+
+        #DivVisualAcuity .col-md-5 h5 {
+            border-radius: 25px;
+            padding: 10px 15px;
+            text-align: center;
+        }
+
+        #DivVisualAcuity .col-md-6 {
+            padding: 0px 3px;
+        }
+
+        #DivVisualAcuity h4 {
+            padding: 15px !important;
+            text-align: center;
+        }
+
+        #DivVisualAcuity .col-md-4 {
+            padding: 0 4px;
+        }
+
+            #DivVisualAcuity .col-md-4 .form-control {
+                padding: 6px 0px !important;
+                text-align: center;
+            }
+
+        #DivVisualAcuity input[type="checkbox"] {
+            height: 15px;
+            width: 15px;
+        }
+
+        #DivVisualAcuity .form-panel {
+            background: #ffffff;
+            margin: 3px 5px;
+            padding: 1px 12px;
+            box-shadow: 0px 0px 3px 1px #aab2bd;
+            text-align: center;
+            font-size: 12px;
+            border-radius: 20px;
+            width: 50%;
+            background-color: #d4f1f9
+        }
+
+        #DivComment .form-control {
+            display: block;
+            width: 100%;
+            height: unset;
+            padding: 4px 2px !important;
+            font-size: 15px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            margin: 2px;
+            background-color: #d4f1f9
+        }
+
+        #DivComment .row {
+            padding: 5px 5px;
+            margin: 0 10px 0 0;
+            font-size: 15px
+        }
+
+        #divTreatment {
+            margin: 10px 10px 0 0;
+        }
+
+            #divTreatment .col-lg-4 {
+                padding: 10px 10px 10px 10px;
+            }
+    </style>
+
+}
+<div class="row">
+    @*<img src="~/img/Optometrisit Inspection Factory.png" class="img-fluid" />*@
+    <h2 id="mainHeading" class="control-label">Visit for Dispensing Glasses : Staff</h2>
+</div>
+
+<div class="row">
+
+    <div class="form-check" id="DivFormModes">
+        <div class="col-lg-2">
+            <label class="form-check-label"> Dispensing Glasses</label>
+        </div>
+        <div class="col-lg-2">
+            <input class="form-check-input readonly" type="checkbox" id="chkCompanies" />
+            <label class="form-check-label" for="chkCompanies">Companies</label>
+
+        </div>
+        <div class="col-lg-2">
+            <input class="form-check-input readonly" type="checkbox" id="chkGoth" />
+            <label class="form-check-label" for="chkGoth">Goths</label>
+
+        </div>
+        <div class="col-lg-2">
+            <input class="form-check-input readonly" type="checkbox" id="chkLocalities" />
+            <label class="form-check-label" for="chkLocalities">Localities</label>
+
+        </div>
+        <div class="col-lg-4">
+            <input class="form-check-input readonly" type="checkbox" id="chkPublicSpaces" />
+            <label class="form-check-label" for="chkPublicSpaces">Public Spaces</label>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3"></div>
+    @*<div class="col-lg-1  pull-right">
+            <button id="btnBack" class="btn btn-anchor">
+                <span style="color:red;text-decoration: none">
+                    <i class="fa fa-backward" title="Back"></i>
+                </span>&nbsp;&nbsp;Back
+            </button>
+        </div>*@
+</div>
+<div class="row">
+
+    <div class="form-check" id="DivFormMode">
+
+
+        <div class="col-lg-2">
+            <label class="form-check-label" for="chkNew">New</label>
+            <input class="form-check-input readonly" type="checkbox" id="chkNew" />
+        </div>
+        <div class="col-lg-2">
+            <label class="form-check-label" for="chkDisplay">Display</label>
+            <input class="form-check-input readonly" type="checkbox" id="chkDisplay" />
+        </div>
+        <div class="col-lg-2">
+            <label class="form-check-label" for="chkEdit">Edit</label>
+            <input class="form-check-input readonly" type="checkbox" id="chkEdit" />
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="row">
+    <div class="col-lg-2" id="DivlblVisitDate">
+        <label class="control-label" style="font-size:medium">Visit Date:</label>
+    </div>
+    <div class="col-lg-3" id="DivinputVisitDate">
+        <input type="text" date class="form-control" id="txtVisitDate" data-date-format="dd-MMM-yyyy" style="border-radius: 20px" />
+
+        <input type="hidden" class="form-control" id="txtGlassDispenseWorkerId" />
+        <input type="hidden" class="form-control" id="txtOptometristWorkerId" />
+        <input type="hidden" class="form-control" value="@ViewData["WorkerAutoId"]" id="txtWorkerAutoId" />
+        <input type="hidden" class="form-control" value="@ViewData["LoginId"]" id="txtLoginId" />
+        <input type="hidden" class="form-control" id="txtCompanyAutoId" />
+    </div>
+    <div class="col-lg-2" id="divDisplay">
+        <label class="control-label">Select Date:</label>
+    </div>
+    <div class="col-lg-3">
+        <select class="form-control" id="ddlGetGlassDispenseId">
+            <option>select </option>
+        </select>
+    </div>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-lg-2">
+        <label class="control-label" style="font-size:medium">Name of Company*</label>
+    </div>
+    <div class="col-lg-4">
+
+        <input class="form-control" type="text" id="autocomplete-input-company" placeholder="Search factory name by pressing ↓ key" />
+        <input class="form-control" type="hidden" id="txtCompanyId" readonly />
+        <input class="form-control" type="hidden" id="txtCompanyName" readonly />
+    </div>
+    <div class="col-lg-1">
+        <label class="control-label" style="font-size:medium">ID:</label>
+    </div>
+    <div class="col-lg-2">
+        <input class="form-control" type="text" id="txtCompanyCode" readonly />
+    </div>
+    <div class="col-lg-3">
+        <label class="form-check-label" style="font-size:18px" for="chkWearGlasses">Glass Wearing</label>
+        <input class="form-check-input" type="checkbox" id="chkWearGlasses" />
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-2">
+        <label class="control-label" style="font-size:medium">Staff Name*</label>
+    </div>
+    <div class="col-lg-4">
+        <input class="form-control" type="text" id="autocomplete-input-worker" placeholder="Search worker name by pressing ↓ key" />
+        <input class="form-control" type="hidden" id="txtWorkerId" readonly />
+    </div>
+    <div class="col-lg-1">
+        <label class="control-label">ID:</label>
+    </div>
+    <div class="col-lg-2">
+        <input class="form-control" type="text" id="txtWorkerCode" readonly />
+    </div>
+    <div class="col-md-1">
+        <label class="form-check-label" style="font-size:18px" for="chkDistance">Distance</label>
+    </div>
+
+    <div class="col-md-2">
+        <input class="form-check-input" type="checkbox" id="chkDistance" />
+        <label style="margin-left: 10px; font-size: 18px" class="form-check-label" for="chkNear">Near</label>
+        <input class="form-check-input" type="checkbox" id="chkNear" value="option3" />
+    </div>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-lg-1">
+        <label class="control-label" style="font-size:medium">Age:</label>
+    </div>
+    <div class="col-lg-1">
+        <input class="form-control" type="text" id="txtAge" readonly />
+    </div>
+    <div class="col-lg-1">
+        <label class="control-label" style="font-size:medium">Gender:</label>
+    </div>
+    <div class="col-lg-2">
+        <input class="form-control" type="text" id="txtGender" />
+    </div>
+    @*<div class="col-lg-1">
+
+            <label class="form-check-label" style="font-size:medium" for="inlineCheckbox1">Glasses: </label>
+        </div>*@
+</div>
+<div class="row">
+    <div class="col-lg-12" id="AutoRefDiv">
+        <h2 class="control-label"> Best Corrected Visual Acuity</h2>
+    </div>
+
+</div>
+
+<div class="row" style="text-align: center" id="lastRefDiv">
+
+    <div class="col-lg-12" text-align:center">
+        <div class="row" style="text-align: center" id="lastRefDiv">
+
+            <div class="col-lg-4">
+                <h3>Spherical</h3>
+            </div>
+            <div class="col-lg-4">
+                <h3>Cyclinderical</h3>
+                @*<h3 style="width: 30%; background-color:lightgray; font-family: 'Myriad Pro'; font-size: 21px; color: #5E1F5C;margin-left:20%">Cyclinderical</h3>*@
+            </div>
+            <div class="col-lg-2">
+                <h3>Axix</h3>
+                @*<h3 style="width: 30%; background-color:lightgray; font-family: 'Myriad Pro'; font-size: 21px; color: #5E1F5C;margin-left:20%">Axix</h3>*@
+            </div>
+
+            <div class="col-lg-2">
+                <h3>IPD</h3>
+                @*<h3 style="width: 30%; background-color:lightgray; font-family: 'Myriad Pro'; font-size: 21px; color: #5E1F5C;margin-left:20%">Axix</h3>*@
+            </div>
+        </div>
+        <div class="row" id="inputBorder">
+            <div class="col-lg-2">
+                <label class="control-label">Right:</label>
+                <input class="form-control" id="txtLastRightSpherical" readonly />
+            </div>
+
+            <div class="col-lg-2">
+                <label class="control-label ">Left:</label>
+                <input class="form-control" id="txtLastLeftSpherical" readonly />
+            </div>
+            <div class="col-lg-2">
+                <label class="control-label">Right:</label>
+                <input class="form-control" id="txtLastRightCyclinderical" readonly />
+            </div>
+            <div class="col-lg-2">
+                <label class="control-label">Left:</label>
+                <input class="form-control" id="txtLastLeftCyclinderical" readonly />
+
+            </div>
+            <div class="col-lg-1">
+                <label class="control-label">Right:</label>
+                <input class="form-control" id="txtLastRightAxix" readonly />
+            </div>
+            <div class="col-lg-1">
+                <label class="control-label">Left:</label>
+                <input class="form-control" id="txtLastLeftAxix" readonly />
+            </div>
+            <div class="col-lg-1">
+                <label id="hideHeading" class="control-label">.</label>
+                <input class="form-control" type="number" placeholder="100" id="txtLastIPD" readonly />
+                @*<h3 style="width: 30%; background-color:lightgray; font-family: 'Myriad Pro'; font-size: 21px; color: #5E1F5C;margin-left:20%">Axix</h3>*@
+            </div>
+            <div class="col-lg-1">
+                <label class="control-label" id="IPDLastLabel" style="text-align:left">mm</label>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-12" id="DivVAGlasses">
+        <div class="col-lg-7">
+            <h3 class="control-label">Distance VA with Glasses</h3>
+        </div>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-4">
+            <h3 class="control-label">Near VA with Glasses</h3>
+        </div>
+    </div>
+    <div class="col-md-7" id="DivVisualAcuity">
+
+        <div class="col-md-7">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Right Eye</h5>
+                </div>
+                <div class="col-md-4">
+                    <h5>Left Eye</h5>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="d-flex">
+
+                        <!-- Default checkbox -->
+                        <input class="form-check-input" type="checkbox" name="Right-Un-aided" id="Right-Un-aided1" value="0" />
+                        <label class="form-panel form-check-label" for="Right-Un-aided1"> 6/6 </label>
+                    </div>
+                </div>
+                <!-- Default checked checkbox -->
+                <div class="row">
+                    <input class="form-check-input" type="checkbox" name="Right-Un-aided" id="Right-Un-aided2" value="1" />
+                    <label class="form-panel form-check-label" for="Right-Un-aided2"> 6/9 </label>
+                </div>
+
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Right-Un-aided" id="Right-Un-aided3" value="2" />
+                    <label class="form-panel form-check-label" for="Right-Un-aided3"> 6/12 </label>
+                </div>
+                <!-- Default checked checkbox -->
+                <div class="row">
+                    <input class="form-check-input" type="checkbox" name="Right-Un-aided" id="Right-Un-aided4" value="3" />
+                    <label class="form-panel form-check-label" for="Right-Un-aided4"> 6/18 </label>
+                </div>
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Right-Un-aided" id="Right-Un-aided5" value="4" />
+                    <label class="form-panel form-check-label" for="Right-Un-aided5"> 6/24 </label>
+                </div>
+                <!-- Default checked checkbox -->
+                <div class="row">
+                    <input class="form-check-input" type="checkbox" name="Right-Un-aided" id="Right-Un-aided6" value="5" />
+                    <label class="form-panel form-check-label" for="Right-Un-aided6"> 6/36 </label>
+                </div>
+
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Right-Un-aided" id="Right-Un-aided7" value="6" />
+                    <label class="form-panel form-check-label" for="Right-Un-aided7"> 6/60 </label>
+                </div>
+                <!-- Default checked checkbox -->
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="d-flex">
+
+                        <!-- Default checkbox -->
+                        <input class="form-check-input" type="checkbox" name="Left-Un-aided" id="Left-Un-aided1" value="0" />
+                        <label class="form-panel form-check-label" for="Left-Un-aided1"> 6/6 </label>
+                    </div>
+                </div>
+                <!-- Default checked checkbox -->
+                <div class="row">
+                    <input class="form-check-input" type="checkbox" name="Left-Un-aided" id="Left-Un-aided2" value="1" />
+                    <label class="form-panel form-check-label" for="Left-Un-aided2"> 6/9 </label>
+                </div>
+
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Left-Un-aided" id="Left-Un-aided3" value="2" />
+                    <label class="form-panel form-check-label" for="Left-Un-aided3"> 6/12 </label>
+                </div>
+                <!-- Default checked checkbox -->
+                <div class="row">
+                    <input class="form-check-input" type="checkbox" name="Left-Un-aided" id="Left-Un-aided4" value="3" />
+                    <label class="form-panel form-check-label" for="Left-Un-aided4"> 6/18 </label>
+                </div>
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Left-Un-aided" id="Left-Un-aided5" value="4" />
+                    <label class="form-panel form-check-label" for="Left-Un-aided5"> 6/24 </label>
+                </div>
+                <!-- Default checked checkbox -->
+                <div class="row">
+                    <input class="form-check-input" type="checkbox" name="Left-Un-aided" id="Left-Un-aided6" value="5" />
+                    <label class="form-panel form-check-label" for="Left-Un-aided6"> 6/36 </label>
+                </div>
+
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Left-Un-aided" id="Left-Un-aided7" value="6" />
+                    <label class="form-panel form-check-label" for="Left-Un-aided7"> 6/60 </label>
+                </div>
+                <!-- Default checked checkbox -->
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-4" id="DivVisualAcuity">
+
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Right Eye</h5>
+            </div>
+            <div class="col-md-6">
+                <h5>Left Eye</h5>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Right-N" id="Right-N-6" value="0" />
+                    <label class="form-panel form-check-label" for="Right-N-6"> N/6 </label>
+                </div>
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Right-N" id="Right-N-8" value="1" />
+                    <label class="form-panel form-check-label" for="Right-N-8"> N/8 </label>
+                </div>
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Right-N" id="Right-N-10" value="2" />
+                    <label class="form-panel form-check-label" for="Right-N-10"> N/10 </label>
+                </div>
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Right-N" id="Right-N-12" value="3" />
+                    <label class="form-panel form-check-label" for="Right-N-12"> N/12 </label>
+                </div>
+
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Right-N" id="Right-N-14" value="4" />
+                    <label class="form-panel form-check-label" for="Right-N-14"> N/14 </label>
+                </div>
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Right-N" id="Right-N-18" value="5" />
+                    <label class="form-panel form-check-label" for="Right-N-18"> N/18 </label>
+                </div>
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" style="margin-left:0" type="checkbox" name="Right-N" id="Less-than-Right-N" value="6" />
+                    <label class="form-panel form-check-label" for="Less-than-Right-N">Less than N/8 </label>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Left-N" id="Left-N-6" value="0" />
+                    <label class="form-panel form-check-label" for="Left-N-6"> N/6 </label>
+                </div>
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Left-N" id="Left-N-8" value="1" />
+                    <label class="form-panel form-check-label" for="Left-N-8"> N/8 </label>
+                </div>
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Left-N" id="Left-N-10" value="2" />
+                    <label class="form-panel form-check-label" for="Left-N-10"> N/10 </label>
+                </div>
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Left-N" id="Left-N-12" value="3" />
+                    <label class="form-panel form-check-label" for="Left-N-12"> N/12 </label>
+                </div>
+
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Left-N" id="Left-N-14" value="4" />
+                    <label class="form-panel form-check-label" for="Left-N-14"> N/14 </label>
+                </div>
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Left-N" id="Left-N-18" value="5" />
+                    <label class="form-panel form-check-label" for="Left-N-18"> N/18 </label>
+                </div>
+                <div class="row">
+                    <!-- Default checkbox -->
+                    <input class="form-check-input" type="checkbox" name="Left-N" id="Less-than-Left-N" value="6" />
+                    <label class="form-panel form-check-label" for="Less-than-Left-N">Less than N/8 </label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12" id="AutoRefDiv">
+        <h2 class="control-label" style="text-align:left;padding-left:10px;"> Comments</h2>
+    </div>
+    <div class="col-md-6" id="DivComment">
+        <div class="row">
+            <!-- Default checkbox -->
+            <label class="form-check-label" style="font-size:18px" for="chkSatisfied"> Satisfied </label>
+            <input class="form-check-input" type="checkbox" name="Comments" id="chkSatisfied" value="1" />
+
+        </div>
+        <div class="row">
+            <!-- Default checkbox -->
+            <label class="form-check-label" style="font-size:18px" for="chkNotSatisfied"> Not Satisfied </label>
+            <input class="form-check-input" type="checkbox" name="Comments" id="chkNotSatisfied" value="1" />
+
+        </div>
+        <div class="row">
+            <!-- Default checkbox -->
+            <label class="form-check-label" style="font-size:18px" for="chkBlurVision">Blur Vision </label>
+            <input class="form-check-input" type="checkbox" name="NotSatisfied" id="chkBlurVision" value="1" disabled />
+        </div>
+        <div class="row">
+            <!-- Default checkbox -->
+            <label class="form-check-label" style="font-size:18px" for="chkHeadache">Headache </label>
+            <input class="form-check-input" type="checkbox" name="NotSatisfied" id="chkHeadache" value="2" disabled />
+        </div>
+        <div class="row">
+            <!-- Default checkbox -->
+            <label class="form-check-label" style="font-size:18px" for="chkPseudo">Pseudo </label>
+            <input class="form-check-input" type="checkbox" name="NotSatisfied" id="chkPseudo" value="3" disabled />
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <!-- Default checkbox -->
+                <label class="form-check-label" style="font-size:18px" for="chkOthers">Others </label>
+                <input class="form-check-input" type="checkbox" name="NotSatisfied" id="chkOthers" value="4" disabled />
+            </div>
+            <div class="col-lg-8">
+                <input type="text" id="txtUnsatisfiedRemarks" class="form-control" readonly />
+            </div>
+        </div>
+
+    </div>
+</div>
+<br />
+<!--<div class="col-lg-12" id="DivVAGlasses">
+    <div class="col-lg-4">
+        <h3 class="control-label">Treatment</h3>
+    </div>
+    <div class="col-lg-4">
+        <h3 class="control-label">Medicines</h3>
+    </div>
+    <div class="col-lg-4">
+        <h3 class="control-label">Precription</h3>
+    </div>
+</div>
+<div class="row" id="divTreatment">
+    <div class="col-lg-4">
+        <div class="row">-->
+<!-- Default checkbox -->
+<!--<input class="form-check-input" type="checkbox" name="Treatment" id="chkSuggested" value="1" />
+        <label style="font-size:18px" class="form-check-label" for="chkSuggested">Glasses suggested </label>
+    </div>
+</div>
+
+
+<div class="col-lg-4">
+    <input type="text" id="txtsuggestedMedicine" class="form-control" readonly/>
+</div>
+<div class="col-lg-4">
+    <input type="text" id="txtsuggestedPrescription" class="form-control" readonly/>
+</div>
+<div class="col-lg-4">
+    <div class="row">-->
+<!-- Default checkbox -->
+<!--<input class="form-check-input" type="checkbox" name="Treatment" id="chknotSuggested" value="2" />
+        <label style="font-size:18px" class="form-check-label" for="chknotSuggested">Glasses not suggested </label>
+    </div>
+</div>
+
+<div class="col-lg-4">
+    <input type="text" id="txtnotsuggestedMedicine" class="form-control" readonly/>
+</div>
+<div class="col-lg-4">
+    <input type="text" id="txtnotsuggestedPrescription" class="form-control" readonly/>
+</div>
+<div class="col-lg-4">
+    <div class="row">-->
+<!-- Default checkbox -->
+<!--<input class="form-check-input" type="checkbox" name="Treatment" id="chknotwilling" value="3" />
+            <label style="font-size:18px" class="form-check-label" for="chknotwilling">Glasses not willing </label>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <input type="text" id="txtnotwillingMedicine" class="form-control" readonly/>
+    </div>
+    <div class="col-lg-4">
+        <input type="text" id="txtnotwillingPrescription" class="form-control" readonly/>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-lg-12" id="AutoRefDiv">
+        <h2 class="control-label" style="text-align:left;padding-left:10px;"> Next Visit</h2>
+    </div>
+
+</div>
+<div class="row" id="divTreatment">
+    <div class="col-lg-12">
+        <div class="row">-->
+<!-- Default checkbox -->
+<!--<input class="form-check-input" type="checkbox" name="NextVisit" id="chkProvideGlasses" value="1" />
+        <label style="font-size:18px" class="form-check-label" for="chkProvideGlasses">Provide Glasses</label>
+    </div>
+
+</div>
+<div class="col-lg-12" style="margin:10px 0 0 0">
+    <div class="row">-->
+<!-- Default checkbox -->
+<!--<input class="form-check-input" type="checkbox" name="NextVisit" id="chkReferToHospital" value="1" />
+            <label style="font-size:18px" class="form-check-label" for="chkReferToHospital">Refer To Hospital</label>
+        </div>
+    </div>
+</div>-->
+<br />
+<br />
+<div class="row">
+    <button id="btnSave" class="btn btn-primary">Save</button>
+    <button id="btnDelete" class="btn btn-primary">Delete</button>
+    <button id="btnRefresh" class="btn btn-primary">Refresh</button>
+</div>
+
+@section js {
+    <script type="text/javascript" src="/Scripts/Factory/GlassDispenseWorker.js"></script>
+
+}

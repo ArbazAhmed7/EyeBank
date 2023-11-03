@@ -1,0 +1,339 @@
+﻿
+@{ ViewData["Title"] = "Goth Enrollment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{
+    <link href="#" rel="stylesheet" />
+    <style>
+        .dataTables_scrollBody {
+            max-height: 370px !important;
+        }
+
+        .dataTables_length {
+            visibility: hidden;
+        }
+
+        .dataTables_wrapper {
+            font-size: 11px;
+            font-style: initial;
+        }
+
+        h5 {
+            font-family: 'Myriad Pro';
+            color: #454091; /*transform Label Color*/
+            font-size: 19px
+        }
+
+        label {
+            font-family: 'Myriad Pro';
+            color: #454091; /*transform Label Color*/
+            font-size: 14px
+        }
+
+        #mainHeading {
+            display: inline-block;
+            padding: 5px 10px; /* Adjust padding as needed */
+            border: solid lightgray; /* Border style */
+            border-radius: 5px; /* Rounded corners */
+            background-color: #d4f1f9; /*Form Name top Main Heading Color*/
+            color: #263272;
+        }
+
+        #DivFormMode label {
+            font-family: 'Myriad Pro';
+            color: #263272; /*New Edit Check boxes Color*/
+            font-size: 17px
+        }
+
+        #divAddress {
+            background-color: #d4f1f9; /*Form Name top Main Heading Color*/
+            border-radius: 10px;
+        }
+
+            #divAddress input {
+                border-top-color: #d4f1f9;
+                border-left-color: #d4f1f9;
+                border-right-color: #d4f1f9;
+                border-bottom-color: dimgrey;
+                border-radius: 0px;
+            }
+
+            #divAddress label {
+                color: dimgrey;
+            }
+
+        #txtCaptureRemarks {
+            border-radius: 20px;
+            background-color: #d4f1f9;
+        }
+
+        #tableDiv .row .com-md-6 {
+            text-align: center !important;
+            margin-left: 15px;
+            margin-right: 20px;
+        }
+    </style>
+}
+<div class="row">
+    @*<img src="~/img/Optometrisit Inspection Factory.png" class="img-fluid" />*@
+    <h2 id="mainHeading" class="control-label"> Goths Enrollment </h2>
+</div>
+
+<div class="row">
+
+    <div class="form-check" id="DivFormModes">
+        <div class="col-lg-2">
+            <label class="form-check-label"> Neighbourhoods</label>
+        </div>
+        <div class="col-lg-2">
+            <input class="form-check-input readonly" type="checkbox" id="chkCompanies" />
+            <label class="form-check-label" for="chkCompanies">Companies</label>
+
+        </div>
+        <div class="col-lg-2">
+            <input class="form-check-input readonly" type="checkbox" id="chkGoth" />
+            <label class="form-check-label" for="chkGoth">Goths</label>
+
+        </div>
+        <div class="col-lg-2">
+            <input class="form-check-input readonly" type="checkbox" id="chkLocalities" />
+            <label class="form-check-label" for="chkLocalities">Localities</label>
+
+        </div>
+        <div class="col-lg-4">
+            <input class="form-check-input readonly" type="checkbox" id="chkPublicSpaces" />
+            <label class="form-check-label" for="chkPublicSpaces">Public Spaces</label>
+
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+
+    <div class="form-check" id="DivFormMode">
+
+
+        <div class="col-lg-2">
+            <label class="form-check-label" for="chkNew">New</label>
+            <input class="form-check-input readonly" type="checkbox" id="chkNew" />
+        </div>
+        <div class="col-lg-2">
+            <label class="form-check-label" for="chkDisplay">Display</label>
+            <input class="form-check-input readonly" type="checkbox" id="chkDisplay" />
+        </div>
+        <div class="col-lg-2">
+            <label class="form-check-label" for="chkEdit">Edit</label>
+            <input class="form-check-input readonly" type="checkbox" id="chkEdit" />
+        </div>
+    </div>
+</div>
+<br />
+
+<!--<div class="row" >
+
+<div class="col-md-3" > </div >-->
+@*<div class="col-md-1  pull-right" >
+    <button id="btnBack" class="btn btn-anchor" style="margin-left:-40px" >
+    <span style="color:red;text-decoration: none" >
+    <i class="fa fa-backward" title="Back" > </i >
+    </span > &nbsp;&nbsp;Back
+    </button >
+    </div >*@
+<!--</div >-->
+<div class="row">
+    <div class="col-md-2">
+        <label class="control-label"> Enrollment Date:</label>
+    </div>
+    <div class="col-md-3">
+        <input class="form-control" id="txtEnrollementDate" type="text" data-date-format="dd-MMM-yyyy">
+        @*<input class="form-control" id="txtEnrollementDateCustom" value="@ViewData["Date"]" readonly style="width:120px;margin-top:-9px;margin-left:-25px" />*@
+        <input type="hidden" class="form-control" value="@ViewData["GothAutoId"]" id="txtGothAutoId">
+        <input type="hidden" class="form-control" id="txtGothCode">
+        <input type="hidden" class="form-control" id="txtGothId">
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-2">
+        <label class="control-label"> Name of Goth:</label>
+    </div>
+    <div class="col-md-4">
+        <input class="form-control" type="text" id="txtGothName">
+    </div>
+    <div class="col-md-1">
+        <label class="control-label"> Website</label>
+    </div>
+    <div class="col-md-5">
+        <input class="form-control" type="text" id="txtWebsite">
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h5> Address of Goth:</h5>
+        <div class="panel panel-default" id="divAddress">
+
+            <div class="col-md-1">
+                <label class="control-label"> Line1</label>
+            </div>
+            <div class="col-md-11">
+                <input class="form-control" type="text" id="txtAddress1">
+
+            </div> <br>
+            <div class="col-md-1">
+                <label class="control-label"> Line2</label>
+            </div>
+            <div class="col-md-11">
+                <input class="form-control" type="text" id="txtAddress2">
+            </div>
+            <div class="col-md-1">
+                <label class="control-label"> Line3</label>
+            </div>
+            <div class="col-md-11">
+
+                <input class="form-control" type="text" id="txtAddress3">
+            </div>
+            <div class="panel-body"> </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+
+            <div class="col-md-4">
+                <label class="control-label"> Town</label>
+                <input class="form-control" type="text" id="txtTown">
+            </div>
+            <div class="col-md-4">
+                <label class="control-label"> District</label>
+                <input class="form-control" type="text" id="txtDistrict">
+            </div>
+            <div class="col-md-4">
+                <label class="control-label"> City*</label>
+                <input class="form-control" type="text" id="txtCity">
+            </div>
+        </div> <br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <label class="control-label"> Name of Person:</label>
+    </div>
+    <div class="col-md-3">
+        <input class="form-control" type="text" id="txtPersonName">
+    </div>
+
+    <div class="col-md-1">
+        <label class="control-label"> Mobile:</label>
+    </div>
+    <div class="col-md-2">
+        <input class="form-control" type="text" maxlength="11" id="txtPersonCell">
+    </div>
+    <div class="col-md-1">
+        <label class="control-label"> Role:</label>
+    </div>
+    <div class="col-md-3">
+        <input class="form-control" type="text" id="txtPersonRole">
+    </div>
+</div>
+<br>
+
+
+
+
+<div class="row">
+    <div class="col-md-3">
+
+        <label class="form-check-label" for="chkWebCam">  Open Camera </label>
+        <input class="form-check-input" type="checkbox" name="chkWebCam" id="chkWebCam" />
+        <br>
+        <label class="control-label"> Profile Image</label>
+        <div id="LiveCamera"> </div> <br>
+        <input type="button" id="btnCapture" class="btn btn-primary" value="Capture Picture" onClick="CaptureSnapshot()">
+    </div>
+
+    <div class="col-md-4">
+        <br> <br>
+        <img id="profileAvatar" src="~/img/noimage.png" style="width: 200px; height: 180px;">
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div>
+            <div class="col-md-3">
+                <input type="file" id="TypeFile" onchange="previewImage(event)">
+                <input type="hidden" id="ImgUpdate">
+                <input type="hidden" id="txtFileName">
+                <input type="hidden" id="txtFileSize">
+                <input type="hidden" id="txtFileType">
+                @*<a href="#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>*@
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label class="control-label">Capture Remarks</label>
+        <input class="form-control" id="txtCaptureRemarks" />
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-primary" id="btn_AddImage"> Add Image</button>
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-danger" id="btn_Remove"> Remove Image</button>
+    </div>
+</div>
+<br>
+<div class="row" id="tableDiv">
+    <h3> Uploaded Images</h3>
+    <div class="row">
+        <div class="com-md-2"> </div>
+        <div class="com-md-6">
+            <table id="tbl_GothInfo" class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th width="100px" scope="col">Sno</th>
+                        <th width="200px" scope="col">File Name</th>
+                        <th width="150px" scope="col">File Size</th>
+                        <th width="150px" scope="col">File Type</th>
+                        <th width="200px" scope="col">Image</th>
+                        <th width="200px" scope="col">Remarks</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody id="tblDetail"> </tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="com-md-2"> </div>
+    </div>
+
+
+    <div class="row" style="text-align:left">
+        <div class="col-md-12 col-lg-12">
+            <button class="btn btn-primary" type="submit" id="btnSave"> &nbsp;&nbsp;Save</button>&nbsp;&nbsp;
+            <button id="btnDelete" class="btn btn-primary">Delete</button>
+            <a class="btn btn-primary" id="btnRefresh"> &nbsp;&nbsp;Refresh</a>
+            @*<a class="btn btn-danger" href="~/Home/Index"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Exit</a>*@
+            @*<button class="btn btn-primary" id="btnSave"><i class="fa fa-save"></i>&nbsp;&nbsp;Exit</button>&nbsp;&nbsp;*@
+        </div>
+    </div>
+</div>
+
+@section js {
+    <script src="~/Scripts/WebCam/webcam.js"></script>
+    <script type="text/javascript" src="~/Scripts/Goths/Goth.js"></script>
+    <script type="text/javascript" language="javascript" src="~/lib/datatables/datatables.min.js"></script>
+    <script type="text/javascript" src="~/lib/advanced-datatable/js/DT_bootstrap.js"></script>
+    <script src="~/lib/jquery-confirm.js"></script>
+    <script src="~/lib/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+}
+
+

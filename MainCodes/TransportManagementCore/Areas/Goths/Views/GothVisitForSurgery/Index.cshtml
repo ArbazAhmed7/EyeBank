@@ -1,0 +1,416 @@
+﻿@{ ViewData["Title"] = "Visit for Surgery : Resident";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <style>
+        input[type="text"] {
+            background-color: #d4f1f9;
+            font-family: 'Myriad Pro';
+            font-size: 15px
+        }
+
+        #txtCommentsSurgeon {
+            background-color: #d4f1f9;
+            font-family: 'Myriad Pro';
+            font-size: 15px;
+            padding: 0px 10px;
+        }
+
+        input[type="number"] {
+            background-color: #d4f1f9;
+            font-family: 'Myriad Pro';
+            font-size: 13px;
+            padding: 0px 10px;
+        }
+
+        h1 {
+            font-family: 'Myriad Pro';
+            color: blueviolet
+        }
+
+        h2 {
+            font-family: 'Myriad Pro'
+        }
+
+        label {
+            font-family: 'Myriad Pro';
+            color: #454091;
+            font-size: 14px
+        }
+
+        #mainHeading {
+            display: inline-block;
+            padding: 5px 10px; /* Adjust padding as needed */
+            border: solid lightgray; /* Border style */
+            border-radius: 5px; /* Rounded corners */
+            background-color: #d4f1f9; /*Form Name top Main Heading Color*/
+            color: #263272;
+        }
+
+        #DivFormMode label {
+            font-family: 'Myriad Pro';
+            color: #263272; /*New Edit Check boxes Color*/
+            font-size: 17px
+        }
+
+        #ddlGetHospitalVisitId, #txtGothCode, #txtResidentCode, #txtAge, #txtlastVisitDate, #txtGender, #txtMobile {
+            background-color: #d4f1f9; /*Form Name top Main Heading Color*/
+            border-radius: 15px; /* Rounded corners */
+        }
+
+        #txtOptometrist {
+            margin: 0 0 0 15px;
+        }
+
+        #DivVAGlasses {
+            border: solid lightgray;
+            color: #263272;
+            background-color: #d4f1f9;
+        }
+
+        #DivDocument {
+            margin: 0 0 15px 0;
+        }
+    </style>
+
+}
+<div class="row">
+    @*<img src="~/img/Optometrisit Inspection Factory.png" class="img-fluid" />*@
+    <h2 id="mainHeading" class="control-label">Hospital Visit For Surgery : Resident</h2>
+</div>
+<div class="row">
+    <div class="col-lg-3"></div>
+    @*<div class="col-lg-1  pull-right">
+            <button id="btnBack" class="btn btn-anchor">
+                <span style="color:red;text-decoration: none">
+                    <i class="fa fa-backward" title="Back"></i>
+                </span>&nbsp;&nbsp;Back
+            </button>
+        </div>*@
+</div>
+<div class="row">
+
+    <div class="form-check" id="DivFormMode">
+
+
+        <div class="col-lg-2">
+            <label class="form-check-label" for="chkNew">New</label>
+            <input class="form-check-input readonly" type="checkbox" id="chkNew" />
+        </div>
+        <div class="col-lg-2">
+            <label class="form-check-label" for="chkDisplay">Display</label>
+            <input class="form-check-input readonly" type="checkbox" id="chkDisplay" />
+        </div>
+        <div class="col-lg-2">
+            <label class="form-check-label" for="chkEdit">Edit</label>
+            <input class="form-check-input readonly" type="checkbox" id="chkEdit" />
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="row">
+    <div class="col-lg-2" id="DivlblVisitDate">
+        <label class="control-label" style="font-size:medium">Surgery Date:</label>
+    </div>
+    <div class="col-lg-3" id="DivinputVisitDate">
+        <input type="text" date class="form-control" id="txtVisitDate" data-date-format="dd-MMM-yyyy" style="border-radius: 20px" />
+
+        <input type="hidden" class="form-control" id="txtVisitSurgeryResidentId" />
+        <input type="hidden" class="form-control" id="txtOptometristResidentId" />
+        <input type="hidden" class="form-control" value="@ViewData["ResidentAutoId"]" id="txtResidentAutoId" />
+        <input type="hidden" class="form-control" value="@ViewData["LoginId"]" id="txtLoginId" />
+    </div>
+    <div class="col-lg-2" id="divDisplay">
+        <label class="control-label">Select Date:</label>
+    </div>
+    <div class="col-lg-3">
+        <select class="form-control" id="ddlGetHospitalVisitId">
+            <option>select </option>
+        </select>
+    </div>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-lg-2">
+        <label class="control-label" style="font-size:medium">Name of Goth*</label>
+    </div>
+    <div class="col-lg-4">
+
+        <input class="form-control" type="text" id="autocomplete-input-Goth" placeholder="Search Goth name by pressing ↓ key" />
+        <input class="form-control" type="hidden" id="txtGothAutoId" readonly />
+        <input class="form-control" type="hidden" id="txtGothName" readonly />
+    </div>
+    <div class="col-lg-1">
+        <label class="control-label" style="font-size:medium">ID:</label>
+    </div>
+    <div class="col-lg-2">
+        <input class="form-control" type="text" id="txtGothCode" readonly />
+    </div>
+    <div class="col-lg-3">
+        <label class="form-check-label" style="font-size:18px" for="chkWearGlasses">Glass Wearing</label>
+        <input class="form-check-input" type="checkbox" id="chkWearGlasses" />
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-2">
+        <label class="control-label" style="font-size:medium">Resident Name*</label>
+    </div>
+    <div class="col-lg-4">
+        <input class="form-control" type="text" id="autocomplete-input-Resident" placeholder="Search Resident name by pressing ↓ key" />
+        <input class="form-control" type="hidden" id="txtResidentId" readonly />
+    </div>
+    <div class="col-lg-1">
+        <label class="control-label">ID:</label>
+    </div>
+    <div class="col-lg-2">
+        <input class="form-control" type="text" id="txtResidentCode" readonly />
+    </div>
+    <div class="col-md-1">
+        <label class="form-check-label" style="font-size:18px" for="chkDistance">Distance</label>
+    </div>
+
+    <div class="col-md-2">
+        <input class="form-check-input" type="checkbox" id="chkDistance" />
+        <label style="margin-left: 10px; font-size: 18px" class="form-check-label" for="chkNear">Near</label>
+        <input class="form-check-input" type="checkbox" id="chkNear" value="option3" />
+    </div>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-lg-1">
+        <label class="control-label" style="font-size:medium">Age:</label>
+    </div>
+    <div class="col-lg-1">
+        <input class="form-control" type="text" id="txtAge" readonly />
+    </div>
+    <div class="col-lg-1">
+        <label class="control-label" style="font-size:medium">Gender:</label>
+    </div>
+    <div class="col-lg-2">
+        <input class="form-control" type="text" id="txtGender" readonly />
+    </div>
+    <div class="col-lg-1">
+        <label class="control-label" style="font-size:medium">Mobile:</label>
+    </div>
+    <div class="col-lg-3">
+        <input class="form-control" type="text" id="txtMobile" readonly />
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-1">
+        <label class="control-label" style="font-size:medium">Hospital*</label>
+    </div>
+    <div class="col-lg-5">
+        <input class="form-control" type="text" id="txtHospital" />
+    </div>
+
+    <div class="col-lg-1">
+        <label class="control-label" style="font-size:medium">Optometrist*</label>
+    </div>
+    <div class="col-lg-5">
+        <input class="form-control" type="text" id="txtOptometrist" />
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-2">
+        <label class="control-label" style="font-size:medium">Ophthalmologist*</label>
+    </div>
+    <div class="col-lg-4">
+        <input class="form-control" type="text" id="txtOphthalmologist" />
+    </div>
+
+    <div class="col-lg-1">
+        <label class="control-label" style="font-size:medium">Surgeon*</label>
+    </div>
+    <div class="col-lg-5">
+        <input class="form-control" type="text" id="txtSurgeon" />
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-12" id="DivVAGlasses">
+        <div class="col-lg-6">
+            <h4 class="control-label">Name of Surgery</h4>
+        </div>
+        <div class="col-lg-6" style="text-align:center">
+            <h4 class="control-label">Comments by Surgeon after Surgery</h4>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-3" style="text-align:center">
+        <label class="control-label" style="font-size:medium;margin-left:25%">Eye*</label>
+        <div class="row">
+            <div class="col-lg-6">
+                <label class="form-check-label" style="margin-left:70%;margin-right:0px;margin-top:0px;margin-bottom:0px" for="chkRightEye">Right</label>
+            </div>
+            <div class="col-lg-6">
+                <label class="form-check-label" style="margin-left:40%;margin-right:0px;margin-top:0px;margin-bottom:0px" for="chkLeftEye">Left</label>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        @*<textarea class="form-control"></textarea>*@
+    </div>
+</div>
+<div class="row" id="DivSurgery">
+    <div class="col-lg-4" style="margin-top:15px">
+        <input class="form-control" type="text" id="txtSurgeryName" />
+    </div>
+    <div class="col-lg-3">
+        <div class="row">
+            <div class="col-lg-6">
+                <input style="margin-left: 0px; margin-right: 0px; margin-top: 12%; margin-bottom: 0px" class="form-check-input" type="checkbox" name="Eye" id="chkRightEye" value="Right" />
+            </div>
+            <div class="col-lg-6">
+                <input style="margin-left: -18px; margin-right: 0px; margin-top: 10%; margin-bottom: 0px" class="form-check-input" type="checkbox" name="Eye" id="chkLeftEye" value="Left" />
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <textarea id="txtCommentsSurgeon" class="form-control" style="margin-top:-6%;height:15%;width:130%"></textarea>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4" id="DivVAGlasses">
+        <div class="col-lg-12">
+            <h4 class="control-label">Post Surgery Visit Date</h4>
+        </div>
+    </div>
+    <div class="col-lg-3" id="DivinputVisitDate">
+        <input type="text" date class="form-control" id="txtPostVisitDate" data-date-format="dd-MMM-yyyy" style="border-radius: 20px" />
+    </div>
+    <div class="col-lg-5"></div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-12" id="DivVAGlasses">
+        <div class="col-lg-12">
+            <h4 class="control-label">List of documents/ pictures</h4>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row" id="DivDocument">
+
+    <div class="col-md-3">
+        <br>
+        <button style="margin-top:5px;" id="btn_upload" data-toggle="modal" data-target="#exampleModal" class="button one btn btn-default noborder"><i class="fa fa-upload"></i> Upload Files</button>
+    </div>
+</div>
+<hr />
+<label class="control-label" id="NoOfDocuments"></label>
+<label class="control-label" id="no"></label>
+<div class="modal fade" id="exampleModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Add Documents</h3>
+            </div>
+            <div class="modal-body">
+
+                <!-- #region commented code -->
+                @*<form id="uploader">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                User Name : <input type="text" id="txtuploader" />
+                                <br />            <br />
+                                <input id="fileInput" type="file" multiple>
+                                <br />            <br />
+
+                                <table class="table" id="FilesList" style="visibility:hidden">
+                                    <tr>
+                                        <th>
+                                            Attachment(s)
+                                        </th>
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                </table>
+                                <input type="button" id="btnupload" value="Upload" style="float:right" />
+
+                            </div>
+                        </div>
+                    </form>*@
+                <!-- #endregion -->
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="col-md-3">
+                            @*<input placeholder="Choose File Name" type="text" id="txtDetail"
+                                class="form-control required" autocomplete="off" />*@
+
+                        </div>
+                        <br />
+                        <div class="col-md-5">
+                            <div class="custom-file">
+                                @*<input class="custom-file-input" type="file" id="ScanDocUpload"
+                                    accept=".pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/png,image/jpeg" />*@
+                                <input class="custom-file-input" type="file" id="ScanDocUpload"
+                                       accept="All Files" multiple />
+                            </div>
+
+                        </div>
+                        <div class="col-md-1">
+
+                            <button id="btnAdd" class="btn btn-primary btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Add"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <table class="table" id="uploadFile">
+                    <thead>
+                        <tr>
+                            <th>Document</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_save1" class="btn btn-primary noborder" data-dismiss="modal"><i class="fa fa-save"></i> OK</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <table hidden class="table" id="tblDocuments">
+            <thead>
+                <tr>
+                    <th hidden>Id</th>
+                    <th width="100px" scope="col">Sno</th>
+                    <th>File Name</th>
+                    <th>File Type</th>
+                    <th>Download</th>
+                    <th>Delete</th>
+
+                </tr>
+            </thead>
+            <tbody id="DocumentBody">
+            </tbody>
+        </table>
+    </div>
+</div>
+<br />
+<br />
+<div class="row">
+    <button id="btnSave" class="btn btn-primary">Save</button>
+    <button id="btnDelete" class="btn btn-primary">Delete</button>
+    <button id="btnRefresh" class="btn btn-primary">Refresh</button>
+</div>
+
+@section js {
+    <script type="text/javascript" src="/Scripts/Goths/VisitForSurgeryGoth.js"></script>
+    <script src="~/lib/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+}

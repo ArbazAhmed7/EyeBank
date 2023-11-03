@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\For Test Build On Uaet</_PublishTargetUrl>
+    <History>True|2023-11-03T07:00:40.6505784Z;True|2023-10-13T14:18:20.5142170+05:00;True|2023-10-11T16:48:37.3035971+05:00;True|2023-10-11T16:20:49.3487240+05:00;True|2023-10-11T15:25:31.2873068+05:00;True|2023-10-10T11:49:20.8130993+05:00;True|2023-10-10T11:47:53.2796432+05:00;True|2023-10-10T11:33:49.7192092+05:00;True|2023-10-09T18:57:36.5322388+05:00;True|2023-10-06T15:51:38.3646343+05:00;True|2023-10-06T15:31:13.2548796+05:00;True|2023-10-06T14:50:55.8766216+05:00;True|2023-10-06T14:21:24.4833313+05:00;</History>
+  </PropertyGroup>
+</Project>
