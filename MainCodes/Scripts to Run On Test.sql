@@ -1,5 +1,0 @@
-SELECT omp.NeedCycloRefraction_RightEye,omp.NeedCycloRefractionRemarks_RightEye
-,omp.CycloplegicRefraction_LeftEye,dbo.GetDiagnosisList_TreatmentPublic()
-FROM dbo.tblOptometristMasterPublic omp
-
- 
